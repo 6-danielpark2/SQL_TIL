@@ -49,7 +49,16 @@
 * BigQuery 관련 기초 지식에 대해서 파악할 수 있다. 
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+Database : 데이터 저장소 / Table : 데이터가 저장된 공간
+OLTP(Online Transaction Processing) : 거래를 하기 위해 사용되는 데이터베이스, 보류/중간 상태가 없음 -> 데이터가 무결함, 데이터의 추가(Insert) or 데이터의 변경(Update)이 많이 발생함, SQL을 사용해 데이터 추출 가능, but 분석을 위해 만든 데이터베이스가 아니기에 쿼리 속도가 느릴 수 있음
+SQL(Structured Query Language) : 데이터베이스에서 데이터를 가지고 올 때 사용하는 언어, 데이터베이스의 데이터를 관리하기 위해 설계된 특수 목적의 프로그래밍 언어
+Row : 새로운 row는 가로로 한 줄을 의미
+Column : 세로로 연상, 각 데이터의 특정 속성 값을 의미
+테이블에 저장 형태 = 엑셀, 스프레드시트와 유사함
+OLAP(Online Analytical Processing) : 분석을 위한 기능 제공되는 서비스
+데이터 웨어하우스 : 데이터를 한 곳에 모아서 저장하는 창고
+BigQuery : Google cloud의 OLAP + Data warehouse
+    -> 쉽게 데이터 추출 가능, 속도 빠름, Firebase/Google Analytics 4의 데이터를 쉽게 추출 가능, 별도의 서버(컴퓨터) 필요 X
 
 
 
