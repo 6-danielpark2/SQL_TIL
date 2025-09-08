@@ -94,8 +94,11 @@ BigQuery : Google cloud의 OLAP + Data warehouse
 
 
 SQL 쿼리 작성 전
+
     -> 데이터가 어떻게 저장되어 있는가 (데이터 웨어하우스)
+
     ->어떤 데이터가 저장되어 있는가 (ERD/entity relationship diagram)
+
     -> 컬럼의 의미는 무엇인가
 
 저장된 데이터를 확인하며 데이터 정리를 하고 ERD를 그리는 것이 좋음
