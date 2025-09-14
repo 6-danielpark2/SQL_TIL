@@ -62,6 +62,7 @@ WHERE : 만약 원하는 조건이 있다면 어떤 조건인가?
     1.	From에 명시된 Table에 저장된 데이터를 필터링(조건 설정)
     2.	Table에 있는 컬럼을 조건 설정
 
+Select –> Where -> From
 
 
 ## 2-5. 집계 (Group By / HAVING / SUM,COUNT)
@@ -73,7 +74,24 @@ WHERE : 만약 원하는 조건이 있다면 어떤 조건인가?
 * having과 where의 차이에 대해서 설명할 수 있다.
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+GROUP BY : 같은 값끼리 모아서 그룹화한다, 특정 컬럼을 기준으로 모으면서 다른 컬럼에선 집계 가능(합, 평균, MAX, MIN 등)
+
+집계하고 싶은 경우 : GROUP BY + 집계함수(AVG, MAX 등)
+
+DISTINCT : 고유값을 알고 싶은 경우, 여러 값 중에 unique한 것만 보고 싶은 경우 사용, 중복을 제거하는 것
+
+HAVING : GROUP BY한 후 조건을 설정하고 싶은 경우 사용
+
+WHERE : 원본 데이터, Table에 바로 조건을 설정하고 싶을 때
+
+서브 쿼리 : SELECT 문 안에 존재하는 SELECT 쿼리, FROM 절에 또 다른 SELECT 문을 넣을 수 있음
+
+ORDER BY : 정렬하기, 쿼리의 맨 아래에 두고 쿼리의 맨 마지막에만 작성하면 됨
+
+순서 : DESC(내림차순), OSC(오름차순 – 보통 Default)
+
+LIMIT : 쿼리문의 결과 ROW 수를 제한하고 싶은 경우 사용, 쿼리문의 맨 마지막에 작성
+
 
 
 
@@ -105,7 +123,14 @@ FROM pokemon;
 
 
 ~~~
-여기에 답을 작성해주세요!
+SQL의 순서는 SELECT - FROM - WHERE로 이어져야 함, 별칭 지을 때 '' 안에 넣지 않는다, ;이 중간에 있으면 쿼리가 끝난 것으로 간주되어 불완전한 문장으로 끝난다
+
+SELECT 
+  name AS 포켓몬 이름, id
+FROM 
+  pokemon
+WHERE 
+  type = 'Electric';
 ~~~
 
 
@@ -124,7 +149,12 @@ GROUP BY type;
 
 
 ~~~
-여기에 답을 작성해주세요.
+GROUP BY 한 후 조건 설정이기에 HAVING이 와야 한다.
+
+SELECT type, AVG(attack) AS avg_attack
+FROM pokemon
+GROUP BY type
+HAVING AVG(attack) >= 60;
 ~~~
 
 
