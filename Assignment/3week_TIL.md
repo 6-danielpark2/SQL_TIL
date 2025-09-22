@@ -61,21 +61,30 @@
 * 연습문제(7문제 이상) 푼 것들 정리하기
 ~~~
 
--- Q1. 포켓몬 중에 type 2가 없는 포켓몬의 수를 작성하는 쿼리를 작성해주세요
+-- 1. 포켓몬 중에 type 2가 없는 포켓몬의 수를 작성하는 쿼리를 작성해주세요
 
 -- (힌트) ~가 없다 : 컬럼 IS NULL
 
 -- 조건 : type 2가 없는
+  
   -- type2가 어떻게 생겼지? type2의 정의는 무엇이지?
 
 -- null은 뭘까?
+  
   -- 아무것도 없는 값. 값이 존재하지 않을 때 null
+  
   -- type2 : null
+  
   -- null 0이랑 다르고, "" 과도 다름 ==> 값이 없는 상태
+  
   -- 연산자 IS NULL
+  
   -- type2 IS NULL
+  
   -- type2 = null은 안되냐? ==> X. NULL은 다른 값과 직접 비교할 수 없음. NULL = NULL 거짓이 아니라 알 수 없음
+  
   -- 핵심 : NULL은 IS 연산자를 사용한다!
+  
   -- type2 IS NOT NULL => NULL 아닌 애들 
 
 -- 어떤 테이블? : pokemon
@@ -85,13 +94,17 @@
 -- 어떻게 집계 : 포켓몬의 수 => COUNT
 
 SELECT
+  
   COUNT(id) AS cnt
 
 FROM basic.pokemon
 
 WHERE
+  
   type2 IS NULL
+  
   -- WHERE 절에서 여러 조건을 연결하고 싶은 경우 ==> AND
+  
   -- OR 조건 => (  ) OR (  )
 
 
@@ -108,20 +121,27 @@ WHERE
 -- 정렬 : type1의 포켓몬 수가 큰 순으로 정렬 => ORDER BY. 큰 순으로 : 큰 것부터 작은 것으로 => 내림차순(DESC) => ORDER BY 포켓몬 수 DESC
 
 SELECT
+  
   type1,
+  
   -- 빨간 밑줄 : 에러 메세지
+  
   COUNT(id) AS pokemon_cnt
+  
   -- 집계 함수는 GROUP BY 와 같이 다님. 집계하는 기준(컬럼)이 없으면 COUNT만 쓸 수 있으나, 집계하는 기준이 있다면 그 기준 컬럼을 GROUP BY에 써줘야 한다
 
 FROM basic.pokemon
 
 WHERE
+  
   type2 IS NULL
 
 GROUP BY
+  
   type1
 
 ORDER BY
+  
   pokemon_cnt DESC
 
 
@@ -136,21 +156,33 @@ ORDER BY
 -- 집계 : 포켓몬 수 => COUNT
 
 SELECT
+  
   type1,
+  
   COUNT(id) AS pokemon_cnt,
+  
   COUNT(DISTINCT id) AS pokemon_cnt2
+  
   -- DISTINCT 언제 쓸까? => 고유한 값만 보고 싶을 때 사용한다. Unique한 값만 알고 싶은 경우 사용
+  
   -- COUNT(id) = COUNT(DISTINCT id)
+  
   -- id를 설계할 때, 중복이 없게 설계했음. 그래서 두개의 결과가 동일
+  
   -- 어떤 컬럼은 중복이 있게 설계되곤 함
+  
   -- DISTINCT도 걸어서 보시고, 어떤 값이 더 맞을까?
+  
   -- DISTINCT : DAU(Daily Active User)
+  
   -- Active한 유저의 수를 하루 단위로 집계
+  
   -- COUNT(DISTINCT user_id) AS dau => 이런 데이터를 저장하는 곳에 접속 기록, 이벤트 로그가 여러 Row가 존재 => Unique => DISTINCT
 
 FROM basic.pokemon
 
 GROUP BY
+  
   type1
 
 
@@ -165,14 +197,19 @@ GROUP BY
 -- 집계 : 포켓몬 수
 
 SELECT
+  
   is_legendary,
+  
   -- 컬럼의 이름 앞부분 일부를 입력하고 기다리면 자동 완성을 할 수 있는데, 이 때 찾아서 엔터
+  
   COUNT(id) AS pokemon_cnt
 
 FROM basic.pokemon
 
 GROUP BY
+  
   is_legendary
+  
   -- 1
 
 -- ORDER BY DESC
@@ -197,17 +234,21 @@ GROUP BY
 -- 집계 : COUNT
 
 SELECT
+  
   name,
+  
   COUNT(name) AS trainer_cnt
 
 FROM basic.trainer
 
 GROUP BY
+  
   name
 
 -- 집계 후 조건 => HAVING, FROM 절의 테이블 조건 => WHERE
 
 HAVING
+  
   trainer_cnt >= 2
 
 -- WHERE : 원본 데이터 FROM 절에 있는 데이터에 조건을 설정하고 싶은 경우
@@ -220,11 +261,17 @@ SELECT
   *
 
 FROM (
+  
   SELECT
+    
     name,
+    
     COUNT(name) AS trainer_cnt
+  
   FROM basic.trainer
+  
   GROUP BY
+  
     name
 )
 
@@ -272,8 +319,11 @@ FROM basic.trainer
 
 WHERE
   -- (name = "Iris")
+  
   -- OR (name = "Whitney")
+  
   -- OR (name = "CynthIa")
+  
   -- OR 조건으로 쓰는 거 너무 길다. 귀찮다 => IN => name에 괄호 안의 Value가 있는 Row만 추출
 
   name IN ("Iris", "Whitney", "Cynthia")
