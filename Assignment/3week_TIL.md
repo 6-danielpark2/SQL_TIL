@@ -391,9 +391,12 @@ GROUP BY ALL : SELECT에 있는 비집계 컬럼을 GROUP BY에 자동으로 포
 -	사용할 테이블
 -	Join Key
 -	데이터 특징
+
 SELECT
 
+
 FROM
+
 WHERE
 
 
