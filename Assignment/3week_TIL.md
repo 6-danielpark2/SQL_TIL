@@ -62,9 +62,12 @@
 ~~~
 
 -- Q1. 포켓몬 중에 type 2가 없는 포켓몬의 수를 작성하는 쿼리를 작성해주세요
+
 -- (힌트) ~가 없다 : 컬럼 IS NULL
+
 -- 조건 : type 2가 없는
   -- type2가 어떻게 생겼지? type2의 정의는 무엇이지?
+
 -- null은 뭘까?
   -- 아무것도 없는 값. 값이 존재하지 않을 때 null
   -- type2 : null
@@ -74,13 +77,18 @@
   -- type2 = null은 안되냐? ==> X. NULL은 다른 값과 직접 비교할 수 없음. NULL = NULL 거짓이 아니라 알 수 없음
   -- 핵심 : NULL은 IS 연산자를 사용한다!
   -- type2 IS NOT NULL => NULL 아닌 애들 
+
 -- 어떤 테이블? : pokemon
+
 -- 어떤 컬럼 : 따로 없음. 포켓몬의 수만 남기면 됨
+
 -- 어떻게 집계 : 포켓몬의 수 => COUNT
 
 SELECT
   COUNT(id) AS cnt
+
 FROM basic.pokemon
+
 WHERE
   type2 IS NULL
   -- WHERE 절에서 여러 조건을 연결하고 싶은 경우 ==> AND
@@ -88,10 +96,15 @@ WHERE
 
 
 -- 2. type2가 없는 포켓몬의 type1과 type1의 포켓몬 수를 알려주는 쿼리를 작성해주세요. 단, type1의 포켓몬 수가 큰 순으로 정렬해주세요.
+
 -- 테이블 : pokemon
+
 -- 조건 : type2가 없는 포켓몬
+
 -- 컬럼 : type1
+
 -- 집계 : 포켓몬 수 ==> COUNT
+
 -- 정렬 : type1의 포켓몬 수가 큰 순으로 정렬 => ORDER BY. 큰 순으로 : 큰 것부터 작은 것으로 => 내림차순(DESC) => ORDER BY 포켓몬 수 DESC
 
 SELECT
@@ -99,19 +112,27 @@ SELECT
   -- 빨간 밑줄 : 에러 메세지
   COUNT(id) AS pokemon_cnt
   -- 집계 함수는 GROUP BY 와 같이 다님. 집계하는 기준(컬럼)이 없으면 COUNT만 쓸 수 있으나, 집계하는 기준이 있다면 그 기준 컬럼을 GROUP BY에 써줘야 한다
+
 FROM basic.pokemon
+
 WHERE
   type2 IS NULL
+
 GROUP BY
   type1
+
 ORDER BY
   pokemon_cnt DESC
 
 
 -- 3. type2 상관없이 type1의 포켓몬 수를 알 수 있는 쿼리를 작성해주세요
+
 -- 테이블 : pokemon
+
 -- 조건 : type2 상관없이 => 조건인가? 아닌가? => 조건이 아님
+
 -- 컬럼 : type1
+
 -- 집계 : 포켓몬 수 => COUNT
 
 SELECT
@@ -126,15 +147,21 @@ SELECT
   -- DISTINCT : DAU(Daily Active User)
   -- Active한 유저의 수를 하루 단위로 집계
   -- COUNT(DISTINCT user_id) AS dau => 이런 데이터를 저장하는 곳에 접속 기록, 이벤트 로그가 여러 Row가 존재 => Unique => DISTINCT
+
 FROM basic.pokemon
+
 GROUP BY
   type1
 
 
 -- 4. 전설 여부에 따른 포켓몬 수를 알 수 있는 쿼리를 작성해주세요.
+
 -- 테이블 : pokemon
+
 -- 조건 : 없음
+
 -- 컬럼 : 전설(is_legendary)
+
 -- 집계 : 포켓몬 수
 
 SELECT
@@ -143,38 +170,55 @@ SELECT
   COUNT(id) AS pokemon_cnt
 
 FROM basic.pokemon
+
 GROUP BY
   is_legendary
   -- 1
+
 -- ORDER BY DESC
 
 -- GROUP BY : is_legendary가 같다. GROUP BY에 컬럼이 많이 있을 수 있음(5개 + COUNT)
+
 -- GROUP BY 1 => SELECT의 첫 컬럼을 의미
+
 -- ORDER BY에도 1,2 등을 사용할 수 있음
+
 -- 1, 2 => 쿼리를 빠르게 작성하고, 결과를 보는 과정. 완성된 쿼리문에서는 1, 2 같은 표현보단 명확하게 컬럼을 명시하는 게 좋습니다.(가독성 관점)
 
 
 -- 5. 동명이인이 있는 이름은 무엇일까요? (한번에 찾으려고 하지 않고 단계적으로 가도 괜찮아요)
+
 -- 테이블 : trainer
+
 -- 조건 : 같은 이름이 2개 이상(동명이인) => COUNT(name) => 2개 이상
+
 -- 컬럼 : 이름
+
 -- 집계 : COUNT
 
 SELECT
   name,
   COUNT(name) AS trainer_cnt
+
 FROM basic.trainer
+
 GROUP BY
   name
+
 -- 집계 후 조건 => HAVING, FROM 절의 테이블 조건 => WHERE
+
 HAVING
   trainer_cnt >= 2
+
 -- WHERE : 원본 데이터 FROM 절에 있는 데이터에 조건을 설정하고 싶은 경우
+
 -- HAVING : GROUP BY와 함께 집계 결과에 조건을 설정하고 싶은 경우
+
 -- 서브쿼리 : 쿼리문을 한번 감싸서 다른 쿼리문에서 사용할 수 있음
 
 SELECT
   *
+
 FROM (
   SELECT
     name,
@@ -183,37 +227,55 @@ FROM (
   GROUP BY
     name
 )
+
 WHERE
   trainer_cnt >= 2
+
 -- HAVING을 쓰면 쿼리 줄 수가 줄어든다.
 
 
 -- 6. trainer 테이블에서 "Iris" 트레이너의 정보를 알 수 있는 쿼리를 작성해주세요.
+
 -- 테이블 : trainer
+
 -- 조건 : 트레이너의 이름 = "Iris"
+
 -- 컬럼 : 정보 => 모든 컬럼
+
 -- 집계 : X
 
 SELECT
   *
+
 FROM basic.trainer
+
 WHERE
   name = "Iris"
+
+
 -- 7. trainer 테이블에서 "Iris", "Whitney", "Cynthia" 트레이너의 정보를 알 수 있는 쿼리를 작성해주세요
+
 -- (힌트) 컬럼 IN ("Iris", "Whitney", "Cynthia")
+
 -- 테이블 : trainer
+
 -- 조건 : 이름 = "Iris", "Whitney", "Cynthia" 중에 있으면 추출
+
 -- 컬럼 : 정보 -> *
+
 -- 집계 : 없음
 
 SELECT
   *
+
 FROM basic.trainer
+
 WHERE
   -- (name = "Iris")
   -- OR (name = "Whitney")
   -- OR (name = "CynthIa")
-  # OR 조건으로 쓰는 거 너무 길다. 귀찮다 => IN => name에 괄호 안의 Value가 있는 Row만 추출
+  -- OR 조건으로 쓰는 거 너무 길다. 귀찮다 => IN => name에 괄호 안의 Value가 있는 Row만 추출
+
   name IN ("Iris", "Whitney", "Cynthia")
 
 
