@@ -132,8 +132,38 @@ IF(조건문,TRUE일 때 값, FALSE일 때의 값) AS 새로운_컬럼_이름
 * 4-5, 4-7 각각에서 두 문제 이상 (최소 4문제) 푼 내용 정리하기
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+4-7 (1)
 
+~~~
+--3. 각 트레이너별로 그들이 포켓몬을 포획한 첫 날(catch_date)을 찾고, 그 날짜를 'DD/MM/YYYY' 형식으로 출력해주세요.
+-- (2024-01-01 => 01/01/2024)
+# 쿼리를 작성하는 목표, 확인할 지표 : 날짜를 특정 형태로 변경! + 포획한 첫 날
+# 쿼리 계산 방법 : DATE => 문자열. FORMAT_DATETIME + MIN
+# 데이터의 기간 : X
+# 사용할 테이블 : trainer_pokemon
+# Join KEY : X
+# 데이터 특징 : catch_date는 UTC 기준의 데이터. 한국 기준으로 하려면 catch_datetime을 사용해야 한다!
+
+SELECT
+  trainer_id,
+  FORMAT_DATE("%d/%m/%Y", min_catch_date) AS new_min_catch_date
+-- 'DD/MM/YYYY'
+FROM(
+  SELECT
+  --포획한 첫 날 + 날짜를 변경
+    trainer_id,
+    MIN(DATE(catch_datetime,"Asia/Seoul")) AS min_catch_date
+  FROM basic.trainer_pokemon
+  GROUP BY
+    trainer_id
+)
+ORDER BY
+    trainer_id
+
+-- ORDER BY : SELECT 제일 바깥에서 1번만 하면 됨
+-- ORDER BY => 모든 ROW를 확인해서 재정렬 => 연산이 많이 소요 => 시간이 오래 걸린다
+-- ORDER BY 위치는 SELECT의 가장 바깥에서 실행
+~~~
 
 
 <br>
