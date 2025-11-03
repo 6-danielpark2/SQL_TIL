@@ -132,6 +132,11 @@ IF(조건문,TRUE일 때 값, FALSE일 때의 값) AS 새로운_컬럼_이름
 * 4-5, 4-7 각각에서 두 문제 이상 (최소 4문제) 푼 내용 정리하기
 ~~~
 
+4-5 (1)
+
+4-5 (2)
+
+
 4-7 (1)
 
 ~~~
@@ -165,6 +170,33 @@ ORDER BY
 -- ORDER BY 위치는 SELECT의 가장 바깥에서 실행
 ~~~
 
+4-7 (2)
+
+~~~
+-- 4. 배틀이 일어난 날짜(battle_date)를 기준으로, 요일별로 배틀이 얼마나 자주 일어났는지 계산해주세요.
+# 쿼리를 작성하는 목표, 확인할 지표 : 요일별로 배틀이 얼마나 자주 일어났는가? 배틀의 건!
+# 쿼리 계산 방법 : 요일별로 COUNT
+# 데이터의 기간 : X
+# 사용할 테이블 : battle
+# Join KEY : X
+# 데이터 특징 : battle_date가 정상적임
+-- 요일을 어떻게 추출할 것인가?
+-- EXTRACT
+
+SELECT
+  day_of_week,
+  COUNT(DISTINCT id) AS battle_cnt
+FROM (
+  SELECT
+    *,
+    EXTRACT(DAYOFWEEK FROM battle_date) AS day_of_week
+  FROM basic.battle
+)
+GROUP BY
+  day_of_week
+ORDER BY
+  day_of_week
+~~~
 
 <br>
 
