@@ -270,7 +270,8 @@ ORDER BY
 <!-- 틀린쿼리에 대한 오류의 원인도 같이 작성해주세요. 문제에서 제공된 login_data 컬럼은 DATE type의 데이터를 가지고 있다고 가정하시면 됩니다. -->
 
 ~~~
-여기에 답을 작성해주세요!
+3번 쿼리가 틀림
+DATE타입이 아니라 문자열인 '2021'을 DATE 타입에 직접 비교해서 오류가 발생
 ~~~
 
 
@@ -301,7 +302,8 @@ FROM pokemon;
 <!-- 근거와 함께 답을 작성해주세요 -->
 
 ~~~
-여기에 답을 작성해주세요!
+Pikachu와 Bulbasaur가 Normal로 출력됨
+Pikachu는 Electric이고 Bulbasaur은 Grass이기에 ELSE로 취급되기 때문
 ~~~
 
 
