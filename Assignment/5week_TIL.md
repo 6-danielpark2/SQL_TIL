@@ -237,6 +237,11 @@ ORDER BY
   day_of_week
 ~~~
 
+학습인증
+---
+![alt text](image-4.png)
+
+
 <br>
 
 <br>
