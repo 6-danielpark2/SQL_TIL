@@ -134,8 +134,47 @@ IF(조건문,TRUE일 때 값, FALSE일 때의 값) AS 새로운_컬럼_이름
 
 4-5 (1)
 
+~~~
+-- 1. 포켓몬의 'Speed'가 70 이상이면 '빠름' 그렇지 않으면 '느림'으로 표시하는 새로운 컬럼 'Speed_Category'를 만들어 주세요.
+# 쿼리를 작성하는 목표, 확인할 지표 : Speed 컬럼을 사용해 새로운 Speed_Category 만들어야 함
+# 쿼리 계산 방법 : CASE, WHEN, IF => 조건이 단일이다. IF. 70 이상
+# 데이터의 기간 : X
+# 사용할 테이블 : pokemon
+# Join KEY : X
+# 데이터 특징 : MIN speed : 5. MAX Speed : 140
+
+SELECT
+  -- *, # 모든 컬럼을 보여줘
+  id,
+  kor_name,
+  speed,
+  IF(speed >= 70, "빠름", "느림") AS Speed_Category
+FROM basic.pokemon
+~~~
+
 4-5 (2)
 
+~~~
+-- 2. 포켓몬의 'type 1'에 따라 'Water', 'Fire', 'Electric' 타입은 각각 '물', '불', '전기'로 그 외 타입은 '기타'로 분류하는 새로운 컬럼 'type_Korean'을 만들어 주세요
+# 쿼리를 작성하는 목표, 확인할 지표 : type1을 사용해서 특정 조건을 만족하는 값을 변경, 기타 => type_Korean
+# 쿼리 계산 방법 : CASE WHEN, IF => 여러 조건이 있음. Water => 물, Fire => 불, Electric => 전기. CASE WHEN
+# 데이터의 기간 : X
+# 사용할 테이블 : pokemon
+# Join KEY : X
+# 데이터 특징 : 타입이 여러가지가 있다.
+
+SELECT
+  id,
+  kor_name,
+  type1,
+  CASE
+    WHEN type1 = "Water" THEN "물"
+    WHEN type1 = "Fire" THEN "불"
+    WHEN type1 = "Electric" THEN "전기"
+    ELSE "기타"
+  END AS type1_Korean
+FROM basic.pokemon
+~~~
 
 4-7 (1)
 
