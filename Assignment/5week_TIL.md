@@ -58,7 +58,24 @@
 * CURRENT_TIME, EXTRACT, DATETIME_TRUNC, PARSE_DATETIME, FROMAT_DATETIME 을 설명할 수 있다. 
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+CURRENT_DATETIME([time zone]) : 현재 DATETIME 출력
+
+EXTRACT - DATETIME에서 특정부분만 추출하고 싶은 경우(ex, 일만 추출하고 싶은 경우, 월만 추출하고 싶은 경우 등)
+
+DATETIME_TRUNC – 시간 자르기 (DATE와 HOUR만 남기고 싶은 경우)
+
+PARSE_DATETIME – 문자열로 저장된 DATETIME을 DATETIME 타입으로 바꾸고 싶은 경우
+   -> PARSE_DATETIME(‘문자열의 형태’,’DATETIME 문자열’) AS datetime
+
+FORMAT_DATETIME - DATETIME타입 데이터를 특정 형태의 문자열 데이터로 변환하고 싶은 경우
+   - 문자열 -> DATETIME : PARSE_DATETIME
+   - DATETIME -> 문자열 : FORMAT_DATETIME
+
+LAST_DAY – 마지막 날을 알고 싶은 경우에 쓰는 함수
+
+DATETIME_DIFF – 두 DATATIME의 차이를 알고 싶은 경우 사용하는 함수
+   -> DATETIME_DIFF(첫 DATETIME, 두 번째 DATETIME, 궁금한 차이)
+
 
 
 
