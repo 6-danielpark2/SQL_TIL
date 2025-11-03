@@ -101,12 +101,14 @@ DATETIME_DIFF – 두 DATATIME의 차이를 알고 싶은 경우 사용하는 �
 CASE WHEN – 여러 조건이 있을 경우 유용
 
 문법
-   SELECT
-   CASE
-      WHEN 조건1 THEN 조건1이 참일 경우 결과
-      WHEN 조건2 THEN 조건2이 참일 경우 결과
-      ELSE 그 외 조건일 경우 결과
-   END AS 새로운 칼럼 이름
+~~~
+SELECT
+CASE
+   WHEN 조건1 THEN 조건1이 참일 경우 결과
+   WHEN 조건2 THEN 조건2이 참일 경우 결과
+   ELSE 그 외 조건일 경우 결과
+END AS 새로운 칼럼 이름
+~~~
 
 CASE WHEN에서는 순서에 따라서 결과가 달라지니 순서가 굉장히 중요함
 
@@ -117,8 +119,9 @@ CASE WHEN에서는 순서에 따라서 결과가 달라지니 순서가 굉장�
 IF – 단일 조건일 경우 사용
 
 문법
-   IF(조건문,TRUE일 때 값, FALSE일 때의 값) AS 새로운_컬럼_이름
-
+~~~
+IF(조건문,TRUE일 때 값, FALSE일 때의 값) AS 새로운_컬럼_이름
+~~~
 
 
 
