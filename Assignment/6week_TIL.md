@@ -55,9 +55,16 @@
 * JOIN에 대한 정의와 필요성에 대해 설명할 수 있다.
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+JOIN - 서로 다른 데이터 테이블을 연결
 
-
+~
+select
+tp*,
+t*
+from trainer_pokemon as tp
+left join trainer as t
+on tp.trainer_id=t.id
+~
 
 ## 5-3. 다양한 JOIN 방법
 
