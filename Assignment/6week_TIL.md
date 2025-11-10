@@ -118,7 +118,59 @@ on a.key=b.key
 * 연습문제(3문제 이상) 푼 것들 정리하기
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+Q1. 트레이너가 보유한 포켓몬들은 얼마나 있는 지 알 수 있는 쿼리를 작성
+~~~
+SELECT
+kor_name as pokemon_name
+count(tp.id) as pokemon_cnt
+from
+(SELECT
+id,
+trainer_id,
+pokemon_id,
+status
+FROM basic.trainer_pokemon
+where status in ("Active", "Training")
+) as tp 
+LEFT JOIN basic.pokemon as p
+on tp.pokemon_id = p.id
+LEFT JOIN basic.trainer as t
+on tp.trainer_id = t.id
+group by kor_name
+~~~
+
+Q2. 각 트레이너가 가진 포켓몬 중에서 'Grass' 타입의 포켓몬 수를 계산
+~~~
+select
+type1,
+count(tp.id) as pokemon_cnt
+from
+(SELECT
+id,
+trainer_id,
+pokemon_id,
+status
+FROM basic.trainer_pokemon 
+where status in ("Active", "Training")
+) as tp
+left join basic.pokemon as p 
+on tp.pokemon_id = p.id
+where type1 = "Grass"
+group by type1
+~~~
+
+Q3. 트레이너의 고향과 포켓몬을 포획한 위치를 비교하여 자신의 고향에서 포켓몬을 포획한 트레이너 수 계산
+~~~
+select
+  count(distinct tp.trainer_id) as trainer_uniq,** 고향에서 포켓몬을 잡아본 적이 있는 트레이너의 수 
+  count(tp.trainer_id) as trainer_cnt** 트레이너가 고향에서 포켓몬을 잡은 모든 경우의 수
+from basic.trainer_pokemon as tp
+left join basic.trainer as t
+on tp.trainer_id = t.id
+where 
+  tp.location is not null **
+  and location = hometown
+~~~
 
 
 
