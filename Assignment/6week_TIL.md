@@ -57,14 +57,14 @@
 
 JOIN - 서로 다른 데이터 테이블을 연결
 
-~
+~~~
 select
 tp*,
 t*
 from trainer_pokemon as tp
 left join trainer as t
 on tp.trainer_id=t.id
-~
+~~~
 
 ## 5-3. 다양한 JOIN 방법
 
@@ -74,7 +74,7 @@ on tp.trainer_id=t.id
 * 각 JOIN 방법들의 차이점에 대해서 설명할 수 있다. 
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+![alt text](image-6.png)
 
 
 
@@ -86,7 +86,28 @@ on tp.trainer_id=t.id
 * JOIN 을 활용한 쿼리를 작성할 수 있다. 
 ~~~
 
-<!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+테이블 확인 -> 테이블에 저장된 데이터와 컬럼 확인
+
+기준 테이블 정의 -> 가장 많이 참고할 기준 테이블 정의
+
+JOIN KEY 찾기 -> 여러 테이블과 연결할 key를 정리
+
+결과 예상하기 -> 결과 테이블을 예상해서 손이나 엑셀로 작성
+
+쿼리 작성/검증 -> 예상한 결과와 동일한 결과가 나오는지 확인
+
+JOIN 문법
+
+~~~
+SELECT
+  a.col1,
+  a.col2,
+  b.col1,
+  b.col2
+FROM table1 as a
+left join table2 as b
+on a.key=b.key
+~~~
 
 
 
